@@ -110,3 +110,15 @@ a {
 a:hover {
   border-bottom: 2px solid #FFFFFF;
 }
+
+button {
+  cursor: pointer;
+  background-color: #F15B31;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin: 20px;
+  border-radius: 4px;
+}

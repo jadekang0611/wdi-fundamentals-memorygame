@@ -23,35 +23,46 @@ const cards = [
 const cardsInPlay = [];
 
 function checkForMatch() {
-if (cardsInPlay.length === 2) {
-    if (cardsInPlay[0] === cardsInPlay[1]) {
+      if (cardsInPlay[0] === cardsInPlay[1]) {
       alert("You found a match!");
     } else {
       alert("Sorry, try again.");
     }
-  }
-}
-function flipCard (cardId){
+  };
+
+function flipCard (){
+  var cardId = this.getAttribute('data-id');
+  this.setAttribute('src', cards[cardId].cardImage);
   console.log("User flipped " + cards[cardId].rank);
   console.log(cards[cardId].cardImage);
   console.log(cards[cardId].suit);
   cardsInPlay.push(cards[cardId].rank);
+
+
+  var cardsToPlay = 2;
+  if (cardsInPlay.length === cardsToPlay) {
   checkForMatch();
+  }
+};
 
-}
+function createBoard() {
+  for (var i=0; i < cards.length; i+=1) {
+  var cardElement = document.createElement('img');
+  cardElement.setAttribute('src', "images/back.png");
+  cardElement.setAttribute('data-id', i);
+  cardElement.addEventListener('click', flipCard);
+  document.getElementById('game-board').appendChild(cardElement);
+  }
+};
 
-flipCard(0);
-flipCard(2);
+var reset = function() {
+  for (i = 0; i < cards.length; i+=1) {
+    document.getElementsByTagName('img')[i].setAttribute('src', "images/back.png");
+  }
+};
 
 
+createBoard();
 
-
-
-/*First you'll create a function that will store all steps related to selecting, or
-flipping over, a card. When the user flips a card over, you'll want to add that card
-to the array of cards that are in play. If the user has flipped over two cards,
-you'll want to check for a match.
-
-Second, you'll create a function to group together the logic to check to see if the
-two cards that the user has flipped over match each other. You'll provide feedback to
-the user letting them know if the two cards match, or if they should try again.*/
+var button = document.querySelector('button');
+button.addEventListener('click', reset);
